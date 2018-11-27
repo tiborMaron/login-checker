@@ -1,5 +1,3 @@
-package com.codecool.loginchecker.model;
-
 import lombok.*;
 
 import javax.persistence.*;
