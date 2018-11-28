@@ -162,6 +162,14 @@ body {
     -webkit-animation: rotation 2s infinite linear;
 }
 
+.fa-times {
+    color: red;
+}
+
+.fa-check-square {
+    color: green;
+}
+
 @-webkit-keyframes rotation {
     from {
         -webkit-transform: rotate(0deg);
