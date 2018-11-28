@@ -19,6 +19,7 @@ body {
 }
 
 .card-signin .card-title {
+    margin-top: 2rem;
     margin-bottom: 2rem;
     font-weight: 300;
     font-size: 1.5rem;
@@ -110,4 +111,49 @@ body {
 .btn-facebook {
     color: white;
     background-color: #3b5998;
+}
+
+.fa-google-plus-square {
+     color: #dd4b39;
+}
+
+.fa-facebook-square {
+    color: #3B5998;
+}
+
+.fa-instagram {
+    color: #bc2a8d;
+}
+
+.fa-github {
+    color: black;
+}
+
+.fa-linkedin {
+    color: #4875B4;
+}
+
+.fab {
+    font-size: 22px;
+}
+
+.icon {
+    display: inline-block;
+}
+
+.icontext {
+    font-size: 18px;
+    margin-left: 4px;
+    display: inline-block;
+}
+
+.iconstatus {
+    color: cornflowerblue;
+    font-size: 18px;
+    float: right;
+    clear: both;
+}
+
+.results {
+    display: none;
 }
