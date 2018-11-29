@@ -21,9 +21,19 @@ public class CredentialsChecker {
     }
 
     public boolean facebook(String email, String password){
+        ChromeDriver driver = new ChromeDriver();
+        try {
+            driver.get("https://facebook.com");
+            driver.findElementById("email").sendKeys(email);
+            driver.findElementById("pass").sendKeys(password);
+            driver.findElementById("loginbutton").click();
+            if (driver.manage().getCookieNamed("c_user") != null)
+                return true;
+        } finally {
+            driver.close();
+        }
         return false;
     }
-
 
     public boolean instagram(String email, String password){
         return false;
@@ -36,5 +46,4 @@ public class CredentialsChecker {
     public boolean linkedin(String email, String password){
         return false;
     }
-
 }
