@@ -28,26 +28,26 @@ public class CredentialsChecker {
     }
 
     public boolean google(String email, String password){
-        ChromeDriver driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        ChromeDriver driver = new ChromeDriver(options);
         try {
             WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
-            Actions actions = new Actions(driver);
-
             driver.get("https://accounts.google.com/signin");
 
             WebElement identifierInput = wait.until(ExpectedConditions.elementToBeClickable(By.name("identifier")));
-            actions.moveToElement(identifierInput).sendKeys(email);
+            identifierInput.sendKeys(email);
             driver.findElementById("identifierNext").click();
 
             WebElement passwordInput = wait.until(ExpectedConditions.elementToBeClickable(By.name("password")));
-            actions.moveToElement(passwordInput).sendKeys(password);
+            passwordInput.sendKeys(password);
             driver.findElementById("passwordNext").click();
 
             wait.until(ExpectedConditions.urlContains("myaccount"));
             if (driver.manage().getCookieNamed("APISID") != null)
                 return true;
 
-        } catch (TimeoutException e) {
+        } catch (Exception e) {
             return false;
         } finally {
             driver.close();
@@ -56,7 +56,9 @@ public class CredentialsChecker {
     }
 
     public boolean facebook(String email, String password){
-        ChromeDriver driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        ChromeDriver driver = new ChromeDriver(options);
         try {
             WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
             driver.get("https://facebook.com");
@@ -74,7 +76,9 @@ public class CredentialsChecker {
     }
 
     public boolean instagram(String email, String password){
-        ChromeDriver driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        ChromeDriver driver = new ChromeDriver(options);
         try {
             WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
             driver.get("https://www.instagram.com/accounts/login/");
@@ -92,7 +96,9 @@ public class CredentialsChecker {
     }
 
     public boolean github(String email, String password){
-        ChromeDriver driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        ChromeDriver driver = new ChromeDriver(options);
         try {
             WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
             driver.get("https://github.com/login");
