@@ -19,15 +19,17 @@ public class CredentialsChecker {
 
     private static final String chromeDriverPath = "src/main/resources/chromedriver";
 
+    private static final int timeOutInSeconds = 10;
+
     @PostConstruct
     private void init() {
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);
     }
 
-    public boolean gmail(String email, String password){
+    public boolean google(String email, String password){
         ChromeDriver driver = new ChromeDriver();
         try {
-            WebDriverWait wait = new WebDriverWait(driver, 10);
+            WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
             Actions actions = new Actions(driver);
 
             driver.get("https://accounts.google.com/signin");
@@ -55,7 +57,9 @@ public class CredentialsChecker {
     public boolean facebook(String email, String password){
         ChromeDriver driver = new ChromeDriver();
         try {
+            WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
             driver.get("https://facebook.com");
+            wait.until(ExpectedConditions.elementToBeClickable(By.id("email")));
             driver.findElementById("email").sendKeys(email);
             driver.findElementById("pass").sendKeys(password);
             driver.findElementById("loginbutton").click();
@@ -68,7 +72,21 @@ public class CredentialsChecker {
     }
 
     public boolean instagram(String email, String password){
-        return false;
+        ChromeDriver driver = new ChromeDriver();
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
+            driver.get("https://www.instagram.com/accounts/login/");
+            WebElement usernameInput = wait.until(ExpectedConditions.elementToBeClickable(By.name("username")));
+            usernameInput.sendKeys(email);
+            driver.findElementByName("password").sendKeys(password);
+            driver.findElementByCssSelector("button._0mzm-.sqdOP.L3NKy").click();
+            wait.until(ExpectedConditions.not(ExpectedConditions.urlContains("login")));
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        } finally {
+            driver.close();
+        }
     }
 
     public boolean github(String email, String password){
