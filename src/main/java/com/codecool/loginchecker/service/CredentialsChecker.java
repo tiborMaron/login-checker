@@ -1,19 +1,12 @@
 package com.codecool.loginchecker.service;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.TimeoutException;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
-import java.time.Duration;
-import java.util.concurrent.TimeUnit;
 
 @Component
 public class CredentialsChecker {
@@ -28,9 +21,7 @@ public class CredentialsChecker {
     }
 
     public boolean google(String email, String password){
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        ChromeDriver driver = new ChromeDriver(options);
+        ChromeDriver driver = new ChromeDriver();
         try {
             WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
             driver.get("https://accounts.google.com/signin");
