@@ -109,6 +109,22 @@ public class CredentialsChecker {
     }
 
     public boolean linkedin(String email, String password){
-        return false;
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless");
+        ChromeDriver driver = new ChromeDriver(options);
+        try {
+            WebDriverWait wait = new WebDriverWait(driver, timeOutInSeconds);
+            driver.get("https://www.linkedin.com/");
+            WebElement loginInput = wait.until(ExpectedConditions.elementToBeClickable(By.id("login-email")));
+            loginInput.sendKeys(email);
+            driver.findElementById("login-password").sendKeys(password);
+            driver.findElementById("login-submit").click();
+            wait.until(ExpectedConditions.urlMatches("https://www.linkedin.com/feed"));
+            return true;
+        } catch (TimeoutException e) {
+            return false;
+        } finally {
+            driver.close();
+        }
     }
 }
